@@ -1,0 +1,153 @@
+  <mat-toolbar class='toolb-top'>
+    <div text-center>
+        <a class='toolb' href="https://xchangetransfer.com"><img width='300'  src='https://s3.us-east-2.amazonaws.com/alertas-bucket/cambiohoje_logo site.png'></a>
+    </div>
+
+
+      <!-- This fills the remaining space of the current row -->
+      <span class="example-fill-remaining-space"></span>
+
+      <button class='login-btn' *ngIf='!auth.logged' mat-button (click)='goToLogin()'>Login</button>
+      <button class='login-btn' *ngIf='auth.logged' mat-button (click)='logout()'>Logout</button>
+      <!-- <button class='login-btn' mat-button [routerLink]="['login']">Login</button> -->
+
+    </mat-toolbar>
+
+<html>
+
+<head>
+    <title>Alerta de Preços</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+    <div class="container alerta-cont">
+
+        <div class="row">
+
+            <div class="col-xl-8 offset-xl-2">
+              <div class='bg-blue banner-txt'>
+                  <h1 class='txt-white text-center' >Alerta de Preço
+                    </h1>
+              </div>
+
+                <p>Insira seu e-mail, selecione a moeda que deseja comprar e o valor. Enviaremos uma notificação quando o câmbio estiver igual ou menor ao valor desejado.
+                  </p>
+                  <p>*Apenas 1(um) alerta por e-mail.
+                    </p>
+
+                <form [formGroup]='alertform' (ngSubmit) = "onClickSubmit(alertform.value)">
+
+                    <div class="messages"></div>
+
+                    <div class="controls">
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="form_email" class='txt-blue'>Email *</label>
+                                    <input formControlName='email' id="form_email" type="email" name="email" class="form-control" placeholder="Insira seu email *" required="required" data-error="Valid email is required.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="form_need" class='txt-blue'>Qual moeda deseja comprar? *</label>
+                                    <select id="form_need" (ngModelChange)="selectChange($event)" [(ngModel)]='moedaChosen' formControlName='moeda' name="need" class="form-control" required="required" data-error="Please specify your need.">
+                                        <option value="USD">US$ Dollar</option>
+                                        <option value="EUR">Euro</option>
+                                        <option value="GBP">Libra</option>
+                                        <option value="CAD">Dólar Canadense</option>
+                                        <option value="AUD">Dólar Australiano</option>
+                                        <option value="NZD">Dólar Neozelandês</option>
+                                        <option value="CHF">Franco Suíço</option>
+                                        <option value="CNY">Iuan</option>
+                                        <option value="JPY">Iene</option>
+                                        <option value="ARS">Peso Argentino</option>
+                                        <option value="CLP">Peso Chileno</option>
+                                        <!-- <option value="EUR">Euro</option> -->
+                                    </select>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" *ngIf='moedaChosen'>
+                                <div class="form-group">
+                                    <label for="form_valor" (ngModelChange)="selectChange($event)" class='txt-blue'>Qual quantidade em {{moedaChosen}} deseja comprar? *</label>
+
+                                        <input formControlName='valor' [(ngModel)]='valorChosen' id="form_valor" type="number" name="valor" class="form-control" placeholder="Insira o valor que quer comprar em moeda estrangeira" required="required" data-error="Número válido é requerido.">
+
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                              <p *ngIf='successMsg'>
+                                  <strong><a class="txt-blue"><span style='color:blue; font-size:200%'>*{{successMsg}}</span></a></strong>
+                              </p>
+                              <p *ngIf='errorMsg'>
+                                <strong><a><span style='color:red; font-size:200%'>*{{errorMsg}}</span></a></strong>
+                              </p>
+                              <p class="text-muted">
+                                  <strong>*</strong> Estes campos são obrigatórios
+                              </p>
+
+                          </div>
+                      </div>
+                      <div class='row'>
+                        <div class="col-md-12">
+                          <input (click)='checkTodaysPrice(moedaChosen, valorChosen)' class="btn btn-xchange-red btn-send btn-block" value="Consultar Preço Hoje">
+                          <!-- <app-alerts></app-alerts> -->
+                        </div>
+                      </div>
+                      <div *ngIf='precoHoje'><p style='font-size:150%; text-align: center; color:#0050c2'>{{valorChosen | currency:moedaChosen}} hoje:</p>
+                        <p style='font-size:130%;text-align: center; color:red'>COTAÇÃO DE HOJE: R${{precoefetivo}}</p>
+                        <p style='font-size:100%;text-align: center; color:red'>Câmbio: R${{valorSemIof}}</p>
+                        <p style='font-size:100%;text-align: center; color:red'>IOF: R${{valorIof}}</p>
+                        <p style='font-size:200%;text-align: center; color:red'>Total Operação: R${{precoHoje}}</p>
+                      </div>
+                      <div class="col-md-12" *ngIf='precoHoje'>
+                        <div class="form-group">
+                            <label for="form_valor" class='txt-blue'>Crie um alerta para avisarmos quando o câmbio que deseja pagar estiver igual ou abaixo do câmbio do dia.</label>
+
+                                <input formControlName='valorunitario' [(ngModel)]='valorunitario' id="form_valor" type="number" name="valorunitario" class="form-control" placeholder="Insira o valor que deseja pagar no câmbio" required="required" data-error="Número válido é requerido.">
+
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                        <div class='row' *ngIf='precoHoje'>
+                          <div class="col-md-12">
+                            <input type="submit" class="btn btn-xchange btn-send btn-block" value="Criar alerta">
+                            <!-- <app-alerts></app-alerts> -->
+                          </div>
+                        </div>
+
+
+                    </div>
+
+                </form>
+
+            </div>
+            <!-- /.8 -->
+
+        </div>
+        <!-- /.row-->
+
+    </div>
+    <!-- /.container-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js" integrity="sha256-dHf/YjH1A4tewEsKUSmNnV05DDbfGN3g7NMq86xgGh8=" crossorigin="anonymous"></script>
+    <script src="contact.js"></script>
+</body>
+
+</html>

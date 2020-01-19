@@ -1,0 +1,23 @@
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+.toolb{
+  padding: 10px;
+}
+.mat-toolbar{
+  background: white!important;
+}
+.login-btn{
+  color: #0050c2!important;
+}
+.toolb-top{
+  padding-top:5vh;
+}
+.table-alertas{
+  padding-top:5vh;
+}
+.txt-red{
+  color:#e31932!important;
+}

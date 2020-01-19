@@ -1,0 +1,56 @@
+.btn-xchange{
+  background-color: #0050c2;
+  color: white;
+}
+.btn-xchange-red{
+  background-color: #e31932;
+  color: white;
+}
+
+.btn-cambiohj-blue{
+  background-color: #3c759a;
+  color: white;
+}
+.btn-cambiohj-green{
+  background-color: #95c631;
+  color: white;
+}
+
+.btn-cambiohj-bluedark{
+  background-color: #2e3d5b;
+  color: white;
+}
+.btn-cambiohj-greendark{
+  background-color: #95c631;
+  color: white;
+}
+
+.txt-cambiohj-green{
+  color: #95c631!important;
+}
+
+.txt-cambiohj-greendark{
+  color: #2d7e03!important;
+}
+
+.txt-cambiohj-blue{
+  color:#3c759a!important;
+}
+
+.txt-cambiohj-bluedark{
+  color:#2e3d5b!important;
+}
+
+.txt-blue{
+  color: #0050c2!important;
+}
+
+.txt-red{
+  color:#e31932!important;
+}
+.txt-white{
+  color:white!important;
+}
+.bg-blue{
+  background-color: #0050c2!important;
+}

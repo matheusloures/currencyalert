@@ -1,0 +1,75 @@
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+h1 {
+  margin-bottom: 40px;
+}
+
+label {
+  color: #333;
+}
+
+.btn-send {
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 20px;
+}
+
+.help-block.with-errors {
+  color: #ff5050;
+  margin-top: 5px;
+}
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.btn-xchange{
+  background-color: #0050c2;
+  color: white;
+}
+.btn-xchange-red{
+  background-color: #95c631;
+  color: white;
+}
+
+.txt-blue{
+  color: #0050c2!important;
+}
+
+.txt-red{
+  color:#e31932!important;
+}
+.txt-white{
+  color:white!important;
+}
+.bg-blue{
+  background-color: #3c759a!important;
+}
+.banner-txt{
+  margin-top: 5vh;
+}
+.bg-red{
+  background-color:#e31932!important;
+}
+.text-center{
+  align-self: center!important;
+}
+.alerta-cont{
+  padding-top: 0rem!important;
+}
+.toolb{
+  padding: 10px;
+}
+.mat-toolbar{
+  background: white!important;
+}
+.login-btn{
+  color: #0050c2!important;
+}
+.toolb-top{
+  padding-top:5vh;
+}

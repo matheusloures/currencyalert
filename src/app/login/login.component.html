@@ -1,0 +1,22 @@
+<html lang="en">
+    <head>
+        <title>Alerta XchangeTransfer</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    </head>
+
+  <body class="text-center">
+    <form [formGroup]='loginform' (ngSubmit) = "onClickSubmit(loginform.value)" class="form-signin">
+      <img class="mb-4" src="https://s3.us-east-2.amazonaws.com/alertas-bucket/xchange_logo_low.png" alt="" width="150">
+      <h1 class="h5 mb-3 font-weight-low txt-red">Faça Login</h1>
+      <label for="inputEmail" class="sr-only">Endereço de Email</label>
+      <input type="email" id="inputEmail" name='email' formControlName='email' class="form-control" placeholder="Endereço de Email" required autofocus>
+      <label for="inputPassword" class="sr-only">Senha</label>
+      <input type="password" id="inputPassword" name='password' formControlName='password' class="form-control" placeholder="Senha" required>
+
+      <input type="submit" class="btn btn-xchange btn-send btn-block" value="Entrar">
+    </form>
+  </body>
+</html>
